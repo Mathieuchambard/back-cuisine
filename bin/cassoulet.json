@@ -1,0 +1,38 @@
+{
+    "_id": {
+        "$oid": "62f9f7feae8347594d09077f"
+      },
+    "title" : "cassoulet",
+    "ingredients": [
+        {
+            "name": "Canard",
+            "quantity": 200,
+            "unity": "g"
+        },
+        {
+            "name": "pute",
+            "quantity": "3049",
+            "unity": "g"
+        },
+        {
+            "name": "huile",
+            "quantity": "39",
+            "unity": "cl"
+        }
+    ],
+    "instructions" :["Prener le canard et éclater le.","Mettre l'oignon dans la casserole","Saucissonner la saucisse de porc remplit de veau d'agneau"],
+    "heat_Balance" :3,
+    "difficulty" : 1,
+    "price" : 2,
+    "time" : {
+        "cooking" : {
+            "time" :40,
+            "unit" : "min"},
+        "preparation" :  {
+            "time" :10,
+            "unit" : "min"},
+        "break" :   {
+            "time" : 0,
+            "unit" : "min"}
+    } 
+}

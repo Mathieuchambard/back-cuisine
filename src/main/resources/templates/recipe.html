@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body>
+<table>
+    <tr>
+        <p><td th:text="'Nom de la recette : ' + ${recipe.name}"></td>  </p>
+
+        <img th:src="@{images/cassoulet.jpg}" />
+        
+        <p><td th:text="'Pour ' + ${recipe.serves} + ' personnes ' "></td> </p>
+        <p><td th:text="'Dificulté :  : ' + ${recipe.difficulty}"></td> </p>
+        <p> <td th:text="'Prix : ' + ${recipe.price} + '/5'"></td> </p>
+        
+        <p><td th:text="'Nutriscore : '"></td> 
+        <td th:switch="${recipe.nutriScore.name()}">
+			    <span th:case="'A'"> <img th:src="@{images/nutriscore/A.png}" /> </span> 
+			    <span th:case="'B'"> <img th:src="@{images/nutriscore/B.png}" /> </span> 
+			    <span th:case="'C'"> <img th:src="@{images/nutriscore/C.png}" /> </span> 
+			    <span th:case="'D'"> <img th:src="@{images/nutriscore/D.png}" /> </span> 
+			    <span th:case="'E'"> <img th:src="@{images/nutriscore/E.png}" /> </span> 
+			</td>
+        </p>
+
+
+        
+        <p><td th:text="'Temps :'"></td> </p>
+        <p><td th:text="'Preparation : ' + ${recipe.time.preparation} + ' min'"></td> </p>
+        <p><td th:text="'Cuisson : ' + ${recipe.time.cooking} + ' min'"></td> </p>
+        <p><td th:text="'Repos : ' + ${recipe.time.rest} + ' min'"></td> </p>
+        
+        
+        
+        
+
+     
+       
+       
+       <p> Liste des Ingredients : 
+       <ul  style = "list-style-type: disc">
+       <tr th:each="ingr, itemStat : ${recipe.ingredients}">
+       	<li>
+       		<td th:switch="${ingr.unit.name()}">
+			    <span th:case="'NONE'" th:text=" ${ingr.name}" /> 
+			    <span th:case="'G'" th:text="${ingr.quantity} + ' g de ' + ${ingr.name}  " />
+			    <span th:case="'CL'" th:text=" ${ingr.quantity} + ' cl de  ' + ${ingr.name}  " />
+			</td>
+      
+        	</li> 
+        </tr>
+        </ul>
+        </p>
+        
+        <tr th:each="instr, itemStat : ${recipe.instructions}">
+        	<td th:text="${itemStat.index} + ') ' + ${instr}"></td>
+        </tr>
+    </tr>
+</table>
+</body>
+</html>

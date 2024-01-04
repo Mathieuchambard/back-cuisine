@@ -1,0 +1,73 @@
+{
+  "id" : null,
+  "nameId" : "azefzeaf",
+  "name" : "azefzeaf",
+  "ingredients" : [ {
+    "name" : "Vin rouge",
+    "quantity" : 100.0,
+    "unit" : "G",
+    "quantityGramme" : 100.0
+  }, {
+    "name" : "Champagne",
+    "quantity" : 100.0,
+    "unit" : "CL",
+    "quantityGramme" : 100.0
+  } ],
+  "instructions" : [ "test" ],
+  "difficulty" : "NORMAL",
+  "heatBalance" : {
+    "energieKcal" : 82.0,
+    "energieKj" : 343.0,
+    "eau" : 86.5,
+    "proteines" : 0.0,
+    "glucides" : 2.0,
+    "sucres" : 0.5,
+    "lipides" : 0.0,
+    "agSature" : 0.0,
+    "fibres" : 0.0,
+    "sel" : 0.0,
+    "sodium" : 1.0,
+    "calcium" : 6.0,
+    "fer" : 0.0,
+    "vitamineD" : 0.0,
+    "vitamineC" : 0.0
+  },
+  "ecologicalBalance" : {
+    "emballage" : "",
+    "scoreEF" : 0.18495691,
+    "changementClimatique" : 1.1347896,
+    "appauvrissementCoucheOzone" : 0.21542408,
+    "rayonnementsIonisants" : 0.44833288,
+    "formationPhotochimiqueOzone" : 5.4347963,
+    "particules" : 0.09812106,
+    "acidificationTerrestreEtEauxDouces" : 0.009549704,
+    "eutrophisationTerrestre" : 0.026130557,
+    "eutrophisationEauxDouces" : 0.30792,
+    "eutrophisationMarine" : 6.707323,
+    "utilisationSol" : 12.290818,
+    "ecotoxiciteEcosystemesAquatiqueEauDouce" : 109.85408,
+    "epuisementEau" : 0.36231896,
+    "epuisementEnergie" : 22.415045,
+    "epuisementMineraux" : 8.378312,
+    "ecoScore" : 94.77894057949838
+  },
+  "ecoScore" : 94.77894057949838,
+  "nutriScore" : "B",
+  "serves" : 4,
+  "price" : 0,
+  "timeRecipe" : {
+    "cooking" : 0,
+    "preparation" : 0,
+    "rest" : 0
+  },
+  "category" : "PLAT",
+  "rates" : null,
+  "score" : 4.3,
+  "date" : {
+    "year" : 2022,
+    "month" : 8,
+    "day" : 29
+  },
+  "urlImage" : "https://www.produits-laitiers.com/app/uploads/2019/04/4176_boursin-836x470.jpg",
+  "title" : "azefzeaf"
+}
