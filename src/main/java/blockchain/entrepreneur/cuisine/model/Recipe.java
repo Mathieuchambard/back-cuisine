@@ -57,15 +57,6 @@ public class Recipe {
 		this.name = name;
 	}
 
-
-
-	public String getTitle() {
-		return name;
-	}
-	
-	public void setTitle(String title) {
-		this.name = title;
-	}
 	
 	public List<IngredientDTO> getIngredients() {
 		return ingredients;

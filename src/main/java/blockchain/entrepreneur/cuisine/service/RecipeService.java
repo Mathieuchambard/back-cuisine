@@ -38,10 +38,44 @@ public class RecipeService {
 		this.ingredientRepository = ingredientRepository;
 	}
 
-	public List<Recipe> getAllRecipes() {
+	/*public List<Recipe> getAllRecipes() {
 		return recipeRepository.findAll();
+	}*/
+
+	public List<String> getAllRecipes() {
+		List<String> recipeNames = new ArrayList<>();
+		File directory = new File(directoryPath);
+		if (directory.exists() && directory.isDirectory()) {
+			File[] files = directory.listFiles();
+
+			if (files != null) {
+				JSONParser parser = new JSONParser();
+
+				for (File file : files) {
+					if (file.isFile() && file.getName().endsWith(".json")) {
+						try (FileReader reader = new FileReader(file)) {
+							Object obj = parser.parse(reader);
+							JSONObject jsonObject = (JSONObject) obj;
+
+							// Assuming the JSON structure contains a "name" attribute
+							String name = (String) jsonObject.get("name");
+
+							if (name != null) {
+								recipeNames.add(name);
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+
+
+		return recipeNames;
 	}
-	
+
+
+
 	public Recipe getRandomRecipe() {
 		List<Recipe> lRecipe = recipeRepository.findAll();
 		int i = (int)(Math.random()*(lRecipe.size()));  

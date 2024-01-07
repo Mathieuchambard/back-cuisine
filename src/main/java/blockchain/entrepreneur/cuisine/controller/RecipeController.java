@@ -28,7 +28,7 @@ public class RecipeController {
 	}
 	
 	@GetMapping("/recipes")
-	public ResponseEntity<List<Recipe>> getAllRecipes() {
+	public ResponseEntity<List<String>> getAllRecipes() {
 		return new ResponseEntity<>(recipeService.getAllRecipes(), HttpStatus.OK);
 	}
 	
@@ -45,16 +45,6 @@ public class RecipeController {
 	public ResponseEntity<List<Recipe>> getAllRecipesByListIngredients(@PathVariable SortType sort,@RequestBody RestrictionRecipeIngredient restriction) {
 		return new ResponseEntity<>(recipeService.getAllRecipesByListIngredients(restriction,sort), HttpStatus.OK);
 	}
-	
-	@GetMapping("/recipe/{subcategory}")
-	public ResponseEntity<List<Recipe>> getRecipesBySubCategories(@PathVariable SubCategoriesRecipe subcategory,@RequestBody SortType sort) {
-		return new ResponseEntity<>(recipeService.getRecipesBySubCategorie(subcategory,sort), HttpStatus.OK);
-	}
-	
-	@GetMapping("/recipe/{category}")
-	public ResponseEntity<List<Recipe>> getRecipesBySubCategories(@PathVariable CategoriesRecipe category,@RequestBody SortType sort) {
-		return new ResponseEntity<>(recipeService.getRecipesByCategorie(category,sort), HttpStatus.OK);
-	}
 
 
 	@PostMapping("/recipe")
@@ -62,8 +52,5 @@ public class RecipeController {
 		return new ResponseEntity<>(recipeService.addRecipe(recipe), HttpStatus.OK);
 	}
 	
-	@PostMapping("/rate/{recipeId}")
-	public ResponseEntity<Recipe> rateRecipe(@PathVariable String recipeId, @RequestBody Rate rate) {
-		return new ResponseEntity<>(recipeService.rateRecipe(recipeId,rate), HttpStatus.OK);
-	}
+
 }
