@@ -1,50 +1,50 @@
 package blockchain.entrepreneur.cuisine.service;
 
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import blockchain.entrepreneur.cuisine.model.*;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.springframework.stereotype.Service;
 
-import blockchain.entrepreneur.cuisine.model.Date;
-import blockchain.entrepreneur.cuisine.model.EcologicalBalance;
-import blockchain.entrepreneur.cuisine.model.HeatBalance;
-import blockchain.entrepreneur.cuisine.model.Ingredient;
-import blockchain.entrepreneur.cuisine.model.IngredientDTO;
-import blockchain.entrepreneur.cuisine.model.Recipe;
-import blockchain.entrepreneur.cuisine.model.RestrictionRecipeIngredient;
 import blockchain.entrepreneur.cuisine.repository.IngredientRepository;
 import blockchain.entrepreneur.cuisine.repository.RecipeRepository;
 
 @Service
 public class RecipeService {
-	
+
 	private RecipeRepository recipeRepository;
 	private IngredientRepository ingredientRepository;
 
-	public RecipeService(RecipeRepository recipeRepository,IngredientRepository ingredientRepository) {
+	public RecipeService(RecipeRepository recipeRepository, IngredientRepository ingredientRepository) {
 		this.recipeRepository = recipeRepository;
 		this.ingredientRepository = ingredientRepository;
 	}
 
-	/*public List<Recipe> getAllRecipes() {
-		return recipeRepository.findAll();
-	}*/
+	public Recipe getRecipe(String name){
+		File directory = new File("src/main/resources/recipe/json/" + name + ".json");
+		Recipe recipe = null;
 
-	public List<String> getAllRecipes() {
-		List<String> recipeNames = new ArrayList<>();
-		File directory = new File(directoryPath);
+		try (FileReader reader = new FileReader(directory)) {
+			BufferedReader fileReader = new BufferedReader(reader);
+			ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			recipe = mapper.readValue(fileReader, Recipe.class);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return recipe;
+	}
+	public List<Pair> getAllRecipes() {
+		List<Pair> recipeNames = new ArrayList<>();
+		File directory = new File("src/main/resources/recipe/json/");
 		if (directory.exists() && directory.isDirectory()) {
 			File[] files = directory.listFiles();
 
@@ -59,9 +59,11 @@ public class RecipeService {
 
 							// Assuming the JSON structure contains a "name" attribute
 							String name = (String) jsonObject.get("name");
+							String nameId = (String) jsonObject.get("nameId");
 
 							if (name != null) {
-								recipeNames.add(name);
+								Pair pair = new Pair(nameId,name);
+								recipeNames.add(pair);
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -69,192 +71,54 @@ public class RecipeService {
 					}
 				}
 			}
-
-
+		}
 		return recipeNames;
 	}
 
+	public List<Pair> getAllRecipesCollection(String name) {
+		File directory = new File("src/main/resources/collection/" + name + ".json");
+		CollectionRecipe collection = null;
+
+		try (FileReader reader = new FileReader(directory)) {
+			BufferedReader fileReader = new BufferedReader(reader);
+			ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			collection = mapper.readValue(fileReader, CollectionRecipe.class);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 
 
-	public Recipe getRandomRecipe() {
-		List<Recipe> lRecipe = recipeRepository.findAll();
-		int i = (int)(Math.random()*(lRecipe.size()));  
-		return lRecipe.get(i);
-	}
+		List<Pair> recipeNames = new ArrayList<>();
+		File directoryRecipe = new File("src/main/resources/recipe/json/");
+		if (directoryRecipe.exists() && directoryRecipe.isDirectory()) {
+			File[] files = directoryRecipe.listFiles();
 
-	
-	public HashMap<String,List<Recipe>> getAllRecipesByAllCombinationIngredients(RestrictionRecipeIngredient restriction, SortType sort) {
-		List<Recipe> allRecipe = recipeRepository.findAll();
-		HashMap<String,List<Recipe>> result = new HashMap<String,List<Recipe>>();
+			if (files != null) {
+				JSONParser parser = new JSONParser();
 
-		for (Recipe recipe : allRecipe) {
-			List<Ingredient> l = recipe.ingredientInRecipe(restriction.getIngredients());
-			if (l.size() != 0 && restriction.acceptRecipe(recipe, ingredientRepository)) {
-				String key = returnKeyFromListIngredient(l);
-				if (result.containsKey(key)) {
-					result.get(key).add(recipe);
-				}
-				else {
-					List<Recipe> lRecipe = new ArrayList<Recipe>();
-					lRecipe.add(recipe);
-					result.put(key,lRecipe);
+				for (File file : files) {
+					if (file.isFile() && file.getName().endsWith(".json")) {
+						try (FileReader reader = new FileReader(file)) {
+							Object obj = parser.parse(reader);
+							JSONObject jsonObject = (JSONObject) obj;
+
+							// Assuming the JSON structure contains a "name" attribute
+							String nameIdRecipe = (String) jsonObject.get("nameId");
+
+
+							if (name != null && collection.inCollection(nameIdRecipe)) {
+								String nameRecipe =(String) jsonObject.get("name");
+								Pair pair = new Pair(nameIdRecipe,nameRecipe);
+								recipeNames.add(pair);
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
 				}
 			}
-			
 		}
-		
-		for (String key : result.keySet()) {
-			List<Recipe> l = result.get(key);
-			l= sort.sortList(l);
-	        result.put(key, l.subList(0,5)); //Renvoie seulement 5 recettes
-	    }
-		
-		
-		return result;
-	}
-	
-	public List<Recipe> getAllRecipesByListIngredients(RestrictionRecipeIngredient restriction, SortType sort) {
-		List<Recipe> allRecipe = recipeRepository.findAll();
-		List<Recipe> recipesWithIngredients = new ArrayList<Recipe>();
-
-		for (Recipe recipe : allRecipe) {
-			if (recipe.ingredientInRecipe(restriction.getIngredients()).size()  == restriction.getIngredients().size()) recipesWithIngredients.add(recipe);
-		}
-		
-		return sort.sortList(recipesWithIngredients);
-	}
-	
-	
-	public Optional<Recipe> getRecipeByName(String name) {
-		return recipeRepository.findByName(name);
-	}
-	
-	public Recipe addRecipe(Recipe recipe) {
-		updateEcologicalBalance(recipe);
-		updateHeatBalance(recipe);
-		updateNameId(recipe);
-		recipe.setUrlImage("https://www.produits-laitiers.com/app/uploads/2019/04/4176_boursin-836x470.jpg");
-		recipe.setDate(new Date());
-		
-        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        String json;
-		try {
-			json = ow.writeValueAsString(recipe);
-			try (FileWriter file = new FileWriter("src/main/resources/recipe/json/" + recipe.getName() + ".json")) {
-	            //We can write any JSONArray or JSONObject instance to the file
-	            file.write(json); 
-	            file.flush();
-	 
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-		} catch (JsonProcessingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        
-		
-		
-		
-		return recipeRepository.insert(recipe);
-	}
-
-	public void deleteRecipeByName(String name) {
-		recipeRepository.deleteByName(name);
-	}
-
-	
-	protected void updateEcologicalBalance(Recipe recipe) {
-		EcologicalBalance ecologicalBalance = new EcologicalBalance();
-		ecologicalBalance.ecologicalBalanceRecipe();
-		float ponderation;
-		float totQuantityPond = 0;
-		boolean valide = true;
-		for (IngredientDTO ingr : recipe.getIngredients()) {
-			
-			Optional<Ingredient> optIngredient = ingredientRepository.findByName(ingr.getName());
-	    	if (optIngredient.isPresent()) {
-	    		ponderation = ingr.getQuantityGramme(optIngredient.get());
-				totQuantityPond += ponderation;
-	    	}
-	    	else throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-			
-			
-		}
-		
-		float totQuantity = 0;
-	    for (IngredientDTO ingr : recipe.getIngredients()) {
-	    	Optional<Ingredient> optIngredient = ingredientRepository.findByName(ingr.getName());
-	    	if (optIngredient.isPresent()) {
-	    		ponderation = ingr.getQuantityGramme(optIngredient.get());
-	    		EcologicalBalance ingrEcologicalBalance = optIngredient.get().getEcologicalBalance();
-	    		if (ingrEcologicalBalance == null) {
-	    			if (100*ponderation/totQuantityPond > 10) {
-	    				valide = false;
-	    			}
-	    		}
-	    		else {
-	    			totQuantity += ponderation;
-		    		ecologicalBalance.sum(ponderation, ingrEcologicalBalance);
-	    		}
-	    	}
-	    	else {
-	    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-	    	}
-	  
-	      }
-	    ecologicalBalance.ponderation(totQuantity);
-		recipe.setEcologicalBalance(ecologicalBalance);
-		if (valide) {
-			recipe.setEcoScore(ecologicalBalance.getEcoScore());
-		}
-		else {
-			recipe.setEcoScore(-1);
-			recipe.setEcologicalBalance(null);
-		}
-	}
-	
-	protected void updateNameId(Recipe recipe) {
-		recipe.setNameId(recipe.getName().replace(' ', '-').replace('é', 'e').replace('è', 'e').toLowerCase());
-	}
-	
-	protected void updateHeatBalance(Recipe recipe) {
-		HeatBalance heatBalance = new HeatBalance();
-		float ponderation;
-		float totQuantity = 0;
-	    for (IngredientDTO ingr : recipe.getIngredients()) {
-	    	Optional<Ingredient> optIngredient = ingredientRepository.findByName(ingr.getName());
-	    	if (optIngredient.isPresent()) {
-	    		ponderation = ingr.getQuantityGramme(optIngredient.get());
-		    	totQuantity += ponderation;
-		    	HeatBalance ingrHeatBalance = optIngredient.get().getHeatBalance();
-		    	heatBalance.sum(ponderation, ingrHeatBalance);
-	    	}
-	    	else {
-	    		throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-	    	}
-	  
-	      }
-	    heatBalance.ponderation(totQuantity);
-	    recipe.setHeatBalance(heatBalance);
-		recipe.setNutriScore(heatBalance.nutriScore());
-	}
-
-
-
-
-
-
-	public static String returnKeyFromListIngredient(List<Ingredient> lingredient) {
-		Collections.sort(lingredient,Ingredient.ComparatorNom);
-		String s = "";
-		for (Ingredient ingr : lingredient) {
-			s += ingr.getName();
-			s += "/";
-		}
-		return s.substring(0, s.length()-1);
-		
+		return recipeNames;
 	}
 }
-
 

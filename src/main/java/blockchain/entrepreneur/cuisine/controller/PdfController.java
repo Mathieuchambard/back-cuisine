@@ -40,8 +40,7 @@ public class PdfController {
         instructions.add("faire cuire 30 min à Auswitch");
         
         recipe.setInstructions(instructions);
-        
-        recipe.setNutriScore(NutriScore.A);
+
         recipe.setServes(4);
         recipe.setPrice(5);
         

@@ -7,21 +7,14 @@ import org.springframework.data.annotation.Id;
 
 public class Recipe {
 	
-	@Id
-	private String id;
 	private String nameId;
 	private String name;
 	private List<IngredientDTO> ingredients;
 	private List<String> instructions;
 	private Difficulty difficulty;
-	private HeatBalance heatBalance;
-	private EcologicalBalance ecologicalBalance;
-	private double ecoScore;
-	private NutriScore nutriScore;
 	private int serves;
 	private int price;
 	private TimeRecipe timeRecipe;
-
 	private Date date;
 	private String urlImage;
 	
@@ -40,13 +33,7 @@ public class Recipe {
 	}
 	
 
-	public NutriScore getNutriScore() {
-		return nutriScore;
-	}
 
-	public void setNutriScore(NutriScore nutriScore) {
-		this.nutriScore = nutriScore;
-	}
 
 
 	public String getName() {
@@ -72,10 +59,6 @@ public class Recipe {
 	
 	public void setInstructions(List<String> instructions) {
 		this.instructions = instructions;
-	}
-	
-	public HeatBalance getHeatBalance() {
-		return heatBalance;
 	}
 
 	public Difficulty getDifficulty() {
@@ -103,21 +86,6 @@ public class Recipe {
 	}
 	
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public float getScore() {
-		return score;
-	}
-
-	public void setScore(float score) {
-		this.score = score;
-	}
 
 	public Date getDate() {
 		return date;
@@ -135,13 +103,6 @@ public class Recipe {
 		this.urlImage = urlImage;
 	}
 
-	public double getEcoScore() {
-		return ecoScore;
-	}
-
-	public void setEcoScore(double ecoScore) {
-		this.ecoScore = ecoScore;
-	}
 
 	public String getNameId() {
 		return nameId;
@@ -151,17 +112,6 @@ public class Recipe {
 		this.nameId = nameId;
 	}
 
-	public EcologicalBalance getEcologicalBalance() {
-		return ecologicalBalance;
-	}
-
-	public void setEcologicalBalance(EcologicalBalance ecologicalBalance) {
-		this.ecologicalBalance = ecologicalBalance;
-	}
-
-	public void setHeatBalance(HeatBalance heatBalance) {
-		this.heatBalance = heatBalance;
-	}
 
 	public TimeRecipe getTimeRecipe() {
 		return timeRecipe;
