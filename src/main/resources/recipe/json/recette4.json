@@ -1,0 +1,61 @@
+{
+  "id" : null,
+  "nameId" : "recette4",
+  "name" : "Tofu",
+  "ingredients" : [ {
+    "name" : "Soja graine",
+    "quantity" : 150.0,
+    "unit" : "G",
+    "quantityGramme" : 150.0
+  }, {
+    "name" : "Eau",
+    "quantity" : 100.0,
+    "unit" : "CL",
+    "quantityGramme" : 100.0
+  }, {
+    "name" : "Jus de citron",
+    "quantity" : 50.0,
+    "unit" : "G",
+    "quantityGramme" : 50.0
+  } ],
+  "instructions" : [ "Faire tremper les graines de soja toute la nuit.", "Bien rincer.", "Mixer avec l'eau dans un blender (une minute environ).", "Filtrer le lait obtenu dans une étamine et conserver l'okara (Les résidus dans l'étamine). ", "L'okara peut être séché pour l'utiliser comme de la farine dans des préparations de gâteaux, cookies. Voir les recettes avec de l'okara.", "Mettre le lait dans une grande casserole. Saler et ajouter 2 c.a.s d'épices que vous souhaitez (tabasco + paprika fumé, curry madras, herbes de provence + poivre). ", "Faire chauffer le lait pendant 30 min à feu moyen en remuant régulièrement (Attention ça peut déborder !).", "Ajouter le coagulant (jus de citron ou 10g de nigari dans 70g d'eau chaude) et mélanger légérement.", "Laisser reposer 10 min hors du feu.", "Extraire le tofu dans une étamine et presser le. " ],
+  "difficulty" : "HARD",
+  "heatBalance" : {
+    "energieKcal" : 219.66667,
+    "energieKj" : 920.3333,
+    "eau" : 52.4,
+    "proteines" : 17.25,
+    "glucides" : 10.733334,
+    "sucres" : 3.9833333,
+    "lipides" : 9.6,
+    "agSature" : 1.5,
+    "fibres" : 6.5,
+    "sel" : 0.0,
+    "sodium" : 1.8333334,
+    "calcium" : 112.0,
+    "fer" : 7.85,
+    "vitamineD" : 0.0,
+    "vitamineC" : 7.0
+  },
+  "ecologicalBalance" : null,
+  "ecoScore" : -1.0,
+  "nutriScore" : "A",
+  "serves" : 1,
+  "price" : 0,
+  "timeRecipe" : {
+    "cooking" : 30,
+    "preparation" : 25,
+    "rest" : 10
+  },
+  "category" : "PLAT",
+  "subcategory" : "ENCAS",
+  "rates" : null,
+  "score" : 4.3,
+  "date" : {
+    "year" : 2022,
+    "month" : 9,
+    "day" : 2
+  },
+  "urlImage" : "https://www.produits-laitiers.com/app/uploads/2019/04/4176_boursin-836x470.jpg",
+  "title" : "Tofu"
+}

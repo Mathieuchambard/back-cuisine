@@ -1,0 +1,99 @@
+{
+  "id" : null,
+  "nameId" : "recette3",
+  "name" : "Soupe petits pois menthe",
+  "ingredients" : [ {
+    "name" : "Petits pois cuit",
+    "quantity" : 900.0,
+    "unit" : "G",
+    "quantityGramme" : 900.0
+  }, {
+    "name" : "Oignon jaune cuit",
+    "quantity" : 100.0,
+    "unit" : "G",
+    "quantityGramme" : 100.0
+  }, {
+    "name" : "Eau",
+    "quantity" : 150.0,
+    "unit" : "CL",
+    "quantityGramme" : 150.0
+  }, {
+    "name" : "Menthe",
+    "quantity" : 50.0,
+    "unit" : "G",
+    "quantityGramme" : 50.0
+  }, {
+    "name" : "Bouillon de legumes",
+    "quantity" : 1.0,
+    "unit" : "NUMBER",
+    "quantityGramme" : 0.0
+  }, {
+    "name" : "Poivre noir en poudre",
+    "quantity" : 0.0,
+    "unit" : "NONE",
+    "quantityGramme" : 0.0
+  }, {
+    "name" : "Sel",
+    "quantity" : 0.0,
+    "unit" : "NONE",
+    "quantityGramme" : 0.0
+  } ],
+  "instructions" : [ "Couper l'oignons et le faire revenir au fond d'une casserole.", "Ajouter les petits pois congelés, l'eau et le bouillon de légumes. Poivrer.", "Faire cuire pendant 25 min.", "Ajouter la menthe fraiche. Mixer le tout.", "Servir chaud ou froid." ],
+  "difficulty" : "EASY",
+  "heatBalance" : {
+    "energieKcal" : 65.708336,
+    "energieKj" : 275.25,
+    "eau" : 81.0,
+    "proteines" : 4.7083335,
+    "glucides" : 7.4583335,
+    "sucres" : 1.375,
+    "lipides" : 0.0,
+    "agSature" : 0.0,
+    "fibres" : 3.4583333,
+    "sel" : 0.0,
+    "sodium" : 8.416667,
+    "calcium" : 40.375,
+    "fer" : 1.0833334,
+    "vitamineD" : 0.0,
+    "vitamineC" : 9.333333
+  },
+  "ecologicalBalance" : {
+    "emballage" : "",
+    "scoreEF" : 0.13422607,
+    "changementClimatique" : 0.8043829,
+    "appauvrissementCoucheOzone" : 0.15016316,
+    "rayonnementsIonisants" : 0.4545037,
+    "formationPhotochimiqueOzone" : 2.9532237,
+    "particules" : 0.034294028,
+    "acidificationTerrestreEtEauxDouces" : 0.0045071226,
+    "eutrophisationTerrestre" : 0.01574643,
+    "eutrophisationEauxDouces" : 0.38113424,
+    "eutrophisationMarine" : 11.165175,
+    "utilisationSol" : 158.41759,
+    "ecotoxiciteEcosystemesAquatiqueEauDouce" : 35.717422,
+    "epuisementEau" : 1.0179865,
+    "epuisementEnergie" : 19.22066,
+    "epuisementMineraux" : 1.9265096,
+    "ecoScore" : 98.31346361578093
+  },
+  "ecoScore" : 98.31346361578093,
+  "nutriScore" : "A",
+  "serves" : 4,
+  "price" : 0,
+  "timeRecipe" : {
+    "cooking" : 25,
+    "preparation" : 5,
+    "rest" : 0
+  },
+  "category" : "ENTREE",
+  "subcategory" : "ENTREEFROIDE",
+  "rates" : null,
+  "score" : 4.3,
+  "date" : {
+    "year" : 2022,
+    "month" : 9,
+    "day" : 2
+  },
+  "urlImage" : "https://www.produits-laitiers.com/app/uploads/2019/04/4176_boursin-836x470.jpg",
+  "title" : "Soupe petits pois menthe"
+}
