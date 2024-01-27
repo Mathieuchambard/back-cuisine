@@ -14,4 +14,16 @@ public enum Difficulty {
 		}
 		return 0;
 	}
+
+	public static Difficulty fromValue(String value) {
+		switch (value) {
+			case "EASY":
+				return Difficulty.EASY;
+			case "NORMAL":
+				return Difficulty.NORMAL;
+			case "HARD":
+				return Difficulty.HARD;
+		}
+		return Difficulty.HARD;
+	}
 }

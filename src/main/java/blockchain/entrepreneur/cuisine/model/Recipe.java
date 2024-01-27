@@ -1,5 +1,7 @@
 package blockchain.entrepreneur.cuisine.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,29 +14,34 @@ public class Recipe {
 	private List<IngredientDTO> ingredients;
 	private List<String> instructions;
 	private Difficulty difficulty;
+
+	private HeatBalance heatBalance;
+
+	private NutriScore nutriscore;
 	private int serves;
 	private int price;
 	private TimeRecipe timeRecipe;
-	private Date date;
+	private String date;
 	private String urlImage;
 	
 	public Recipe() {}
-	
 
-	
-	public List<Ingredient> ingredientInRecipe(List<Ingredient> lIngredient) {
-		List<Ingredient> l = new ArrayList<Ingredient>();
-		for (Ingredient ingr : lIngredient) {
-			for (IngredientDTO ingrRecipe : this.ingredients) {
-				if (ingr.getName() == ingrRecipe.getName()) l.add(ingr);
-			}
-		}
-		return l ;
+
+	public NutriScore getNutriscore() {
+		return nutriscore;
 	}
-	
 
+	public void setNutriscore(NutriScore nutriscore) {
+		this.nutriscore = nutriscore;
+	}
 
+	public HeatBalance getHeatBalance() {
+		return heatBalance;
+	}
 
+	public void setHeatBalance(HeatBalance heatBalance) {
+		this.heatBalance = heatBalance;
+	}
 
 	public String getName() {
 		return name;
@@ -87,11 +94,11 @@ public class Recipe {
 	
 
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
@@ -122,7 +129,9 @@ public class Recipe {
 	}
 
 
-	
-
-
+    public void updateDate() {
+		LocalDate dateDuJour = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		this.date = dateDuJour.format(formatter);
+    }
 }

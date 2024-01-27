@@ -25,6 +25,19 @@ public class CollectionService {
     public CollectionService() {
     }
 
+
+    public CollectionRecipe getCollection(String nameId){
+        CollectionRecipe coll = new CollectionRecipe();
+        try (FileReader reader = new FileReader("src/main/resources/collection/" + nameId+".json")) {
+            BufferedReader fileReader = new BufferedReader(reader);
+            ObjectMapper mapper = new ObjectMapper();
+            coll = mapper.readValue(fileReader, CollectionRecipe.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return coll;
+    }
+
     public CollectionRecipe deleteCollection(String nameId){
         String cheminFichier = "src/main/resources/collection/"+ nameId+".json";
         File fichierASupprimer = new File(cheminFichier);
@@ -69,6 +82,23 @@ public class CollectionService {
 
         return collection;
     }
+
+
+    public CollectionRecipe modifyCollection(String nameId, CollectionRecipe collection) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        collection.setNameId(nameId);
+
+
+        try (FileWriter fileWriter = new FileWriter("src/main/resources/collection/" + nameId + ".json")) {
+            objectMapper.writeValue(fileWriter, collection);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return collection;
+    }
+
+
 
 
 

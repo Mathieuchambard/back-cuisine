@@ -1,7 +1,12 @@
 package blockchain.entrepreneur.cuisine.model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.Comparator;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.annotation.Id;
 
 
@@ -13,16 +18,16 @@ public class Ingredient {
 	private HeatBalance heatBalance;
 	private EcologicalBalance ecologicalBalance;
 	private boolean glutenFree;
-	private boolean pregnantPermission; 
+	private boolean pregnantPermission;
 	private boolean vegan;
 
 	private int ciqual;
 	private float unitTogramme;
-	
+
 	public Ingredient() {
-		
+
 	}
-	
+
 	public boolean isGlutenFree() {
 		return glutenFree;
 	}
@@ -53,7 +58,6 @@ public class Ingredient {
 	}
 
 
-	
 	public String getId() {
 		return id;
 	}
@@ -100,7 +104,7 @@ public class Ingredient {
 	public void setCiqual(int ciqual) {
 		this.ciqual = ciqual;
 	}
-	
+
 	public float getUnitTogramme() {
 		return unitTogramme;
 	}
@@ -110,12 +114,12 @@ public class Ingredient {
 	}
 
 	public static Comparator<Ingredient> ComparatorNom = new Comparator<Ingredient>() {
-	      
-        @Override
-        public int compare(Ingredient e1, Ingredient e2) {
-            return e1.name.compareTo(e2.name);
-        }
-    };
 
-	
+		@Override
+		public int compare(Ingredient e1, Ingredient e2) {
+			return e1.name.compareTo(e2.name);
+		}
+	};
+
+
 }

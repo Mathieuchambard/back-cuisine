@@ -25,15 +25,10 @@ public class IngredientController {
 		
 	
 	@GetMapping("/ingredients")
-	public ResponseEntity<List<Ingredient>> getAllIngredients() {
-		return new ResponseEntity<List<Ingredient>>(ingredientService.getAllIngredients(), HttpStatus.OK);
+	public ResponseEntity<List<String>> getAllIngredients() {
+		return new ResponseEntity<List<String>>(ingredientService.getAllIngredients(), HttpStatus.OK);
 	}
-	
-	@PostMapping("/ingredient")
-	public ResponseEntity<HttpStatus> addIngredient(@RequestBody Ingredient ingr) {
-		ingredientService.addIngredient(ingr);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
+
 	
 	
 

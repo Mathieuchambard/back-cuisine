@@ -1,5 +1,7 @@
 package blockchain.entrepreneur.cuisine.model;
 
+import java.util.List;
+
 public class HeatBalance {
 
 	private float energieKcal;
@@ -239,6 +241,13 @@ public class HeatBalance {
 	public void setVitamineC(float vitamineC) {
 		this.vitamineC = vitamineC;
 	}
-	
 
+
+	public void updateHeatBalance(List<IngredientDTO> ingredients) {
+		for (IngredientDTO ingredient : ingredients) {
+			Ingredient ingr = ingredient.getIngredient();
+			this.sum(ingredient.getQuantityGramme(ingr)/100,ingr.getHeatBalance());
+
+		}
+	}
 }

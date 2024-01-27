@@ -1,9 +1,8 @@
 package blockchain.entrepreneur.cuisine.controller;
 
-import java.util.HashMap;
 import java.util.List;
 
-import blockchain.entrepreneur.cuisine.model.Pair;
+import blockchain.entrepreneur.cuisine.model.RecipeDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,14 +25,18 @@ public class RecipeController {
 	public RecipeController(RecipeService recipeService) {
 		this.recipeService = recipeService;
 	}
-	
+
+	@PostMapping("/recipe")
+	public ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
+		return new ResponseEntity<Recipe>(recipeService.addRecipe(recipe), HttpStatus.OK);
+	}
 	@GetMapping("/recipes")
-	public ResponseEntity<List<Pair>> getAllRecipes() {
+	public ResponseEntity<List<RecipeDTO>> getAllRecipes() {
 		return new ResponseEntity<>(recipeService.getAllRecipes(), HttpStatus.OK);
 	}
 
 	@GetMapping("/recipes/{nameCollection}")
-	public ResponseEntity<List<Pair>> getAllRecipesCollection(@PathVariable String nameCollection) {
+	public ResponseEntity<List<RecipeDTO>> getAllRecipesCollection(@PathVariable String nameCollection) {
 		return new ResponseEntity<>(recipeService.getAllRecipesCollection(nameCollection), HttpStatus.OK);
 	}
 

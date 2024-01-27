@@ -1,5 +1,12 @@
 package blockchain.entrepreneur.cuisine.model;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 public class IngredientDTO {
 
 	private String name;
@@ -73,6 +80,20 @@ public class IngredientDTO {
 
 	public IngredientDTO copy() {
 		return new IngredientDTO(this.name, this.quantity, this.unit);
+	}
+
+	public Ingredient getIngredient() {
+		File directory = new File("src/main/resources/jsonIngredient/" + this.getName() + ".json");
+		Ingredient ingredient = null;
+
+		try (FileReader reader = new FileReader(directory)) {
+			BufferedReader fileReader = new BufferedReader(reader);
+			ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+			ingredient = mapper.readValue(fileReader, Ingredient.class);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ingredient;
 	}
 	
 	
