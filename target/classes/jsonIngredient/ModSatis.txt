@@ -1,0 +1,14 @@
+efficiency checker ? Permet de check facilement le nombre par minute qui arrive et qui part.
+Item hopper : Mettre plus facilement tes items dans des coffres
+Smart : construction plus facile
+Structural solutions : structure en plus
+X3 Signs : panneau
+Ficsit Farming : ferme
+Mini Map
+No portable miner : enleve les portables miners dans le craft des exrtacteur
+Glass foundation fix : rend vitre plus jolie
+Beltfeld biomass : ajoute conboyeur belt sur biomass
+Special containers : add containers
+Linear motion : ascenseur
+X3 ROad
+Floor hole ceiling logistics : permet d'incruster les convoyeur dans les plafond pour que ca soit moins moches
