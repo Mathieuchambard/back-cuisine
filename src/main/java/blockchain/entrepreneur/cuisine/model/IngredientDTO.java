@@ -82,7 +82,7 @@ public class IngredientDTO {
 		return new IngredientDTO(this.name, this.quantity, this.unit);
 	}
 
-	public Ingredient getIngredient() {
+	public Ingredient dtoToIngredient() {
 		File directory = new File("src/main/resources/jsonIngredient/" + this.getName() + ".json");
 		Ingredient ingredient = null;
 

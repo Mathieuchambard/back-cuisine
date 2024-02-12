@@ -5,12 +5,7 @@ import java.util.List;
 import blockchain.entrepreneur.cuisine.model.RecipeDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import blockchain.entrepreneur.cuisine.model.Recipe;
 import blockchain.entrepreneur.cuisine.service.RecipeService;
@@ -18,6 +13,7 @@ import blockchain.entrepreneur.cuisine.service.RecipeService;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/recipe")
 public class RecipeController {
 
 	private RecipeService recipeService;
@@ -26,23 +22,33 @@ public class RecipeController {
 		this.recipeService = recipeService;
 	}
 
-	@PostMapping("/recipe")
+	@PostMapping
 	public ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
 		return new ResponseEntity<Recipe>(recipeService.addRecipe(recipe), HttpStatus.OK);
 	}
-	@GetMapping("/recipes")
+	@GetMapping
 	public ResponseEntity<List<RecipeDTO>> getAllRecipes() {
 		return new ResponseEntity<>(recipeService.getAllRecipes(), HttpStatus.OK);
 	}
 
-	@GetMapping("/recipes/{nameCollection}")
+	@GetMapping("/collection/{nameCollection}")
 	public ResponseEntity<List<RecipeDTO>> getAllRecipesCollection(@PathVariable String nameCollection) {
 		return new ResponseEntity<>(recipeService.getAllRecipesCollection(nameCollection), HttpStatus.OK);
 	}
 
-	@GetMapping("/recipe/{name}")
+	@GetMapping("/{name}")
 	public ResponseEntity<Recipe> getRecipe(@PathVariable String name) {
 		return new ResponseEntity<>(recipeService.getRecipe(name), HttpStatus.OK);
+	}
+
+	@DeleteMapping("/{nameId}")
+	public ResponseEntity<Recipe> deleteRecipe(@PathVariable String nameId) {
+		return new ResponseEntity<Recipe>(recipeService.deleteRecipe(nameId), HttpStatus.OK);
+	}
+
+	@PutMapping("/{nameId}")
+	public ResponseEntity<Recipe> modifyRecipe(@RequestBody Recipe recipe,@PathVariable String nameId) {
+		return new ResponseEntity<Recipe>(recipeService.modifyRecipe(nameId,recipe), HttpStatus.OK);
 	}
 
 }

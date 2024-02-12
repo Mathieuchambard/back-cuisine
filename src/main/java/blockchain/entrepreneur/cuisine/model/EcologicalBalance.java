@@ -1,5 +1,7 @@
 package blockchain.entrepreneur.cuisine.model;
 
+import java.util.List;
+
 public class EcologicalBalance {
 	private String emballage;
 	private float scoreEF;
@@ -18,26 +20,9 @@ public class EcologicalBalance {
 	private float epuisementEnergie;
 	private float epuisementMineraux;
 	
-	public EcologicalBalance () {
-		this.setEmballage("");
-		this.scoreEF = -1;
-		this.changementClimatique = -1;
-		this.appauvrissementCoucheOzone= -1;
-		this.rayonnementsIonisants= -1;
-		this.formationPhotochimiqueOzone= -1;
-		this.particules= -1;
-		this.acidificationTerrestreEtEauxDouces= -1;
-		this.eutrophisationTerrestre = -1;
-		this.eutrophisationEauxDouces= -1;
-		this.eutrophisationMarine= -1;
-		this.utilisationSol= -1;
-		this.ecotoxiciteEcosystemesAquatiqueEauDouce= -1;
-		this.epuisementEau= -1;
-		this.epuisementEnergie= -1;
-		this.epuisementMineraux= -1;
-	}
-	
-	public void ecologicalBalanceRecipe() {
+
+
+	public EcologicalBalance() {
 		this.setEmballage("");
 		this.scoreEF = 0;
 		this.changementClimatique = 0;
@@ -94,8 +79,27 @@ public class EcologicalBalance {
 		this.epuisementEnergie /= ponderation ;
 		this.epuisementMineraux /= ponderation ;
 	}
+
+	public double updateEcologicalBalance(List<IngredientDTO> ingredients) {
+		boolean valide = true;
+		for (IngredientDTO ingredient : ingredients) {
+			Ingredient ingr = ingredient.dtoToIngredient();
+			if (ingr.getEcologicalBalance() != null){
+			this.sum(ingredient.getQuantityGramme(ingr)/100,ingr.getEcologicalBalance());}
+			else{
+				valide = false;
+			}
+
+		}
+		if (!valide){
+			return -1;
+		}
+		else{
+			return this.ecologicalBalanceToEcoScore();
+		}
+	}
 	
-	public double getEcoScore() {
+	public double ecologicalBalanceToEcoScore() {
 		return 100 - 20*Math.log(10*this.scoreEF)/ Math.log(2+1/(100*Math.pow(this.scoreEF,4)));
 	}
 	public float getScoreEF() {

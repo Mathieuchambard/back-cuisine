@@ -31,15 +31,56 @@ public class RecipeService {
 		this.ingredientRepository = ingredientRepository;
 	}
 
+
+	public Recipe deleteRecipe(String nameId){
+		String cheminFichier = "src/main/resources/recipe/json/"+ nameId+".json";
+		File fichierASupprimer = new File(cheminFichier);
+		fichierASupprimer.delete();
+		return null;
+	}
+
+	public Recipe modifyRecipe(String nameId,Recipe recipe){
+		ObjectMapper objectMapper = new ObjectMapper();
+		recipe.updateDate();
+
+		HeatBalance heatBalance = new HeatBalance();
+		heatBalance.updateHeatBalance(recipe.getIngredients());
+		recipe.setHeatBalance(heatBalance);
+		recipe.setNutriscore(heatBalance.nutriScore());
+
+		EcologicalBalance ecologicalBalance = new EcologicalBalance();
+		double ecoScore = ecologicalBalance.updateEcologicalBalance(recipe.getIngredients());
+		recipe.setEcoScore(ecoScore);
+		recipe.setEcologicalBalance(ecologicalBalance);
+
+		recipe.setNameId(nameId);
+
+
+		try (FileWriter fileWriter = new FileWriter("src/main/resources/recipe/json/" + nameId + ".json")) {
+			objectMapper.writeValue(fileWriter, recipe);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		return recipe;
+
+
+	}
+
 	public Recipe addRecipe(Recipe recipe){
 		ObjectMapper objectMapper = new ObjectMapper();
 		recipe.updateDate();
 
 		HeatBalance heatBalance = new HeatBalance();
 		heatBalance.updateHeatBalance(recipe.getIngredients());
-
 		recipe.setHeatBalance(heatBalance);
 		recipe.setNutriscore(heatBalance.nutriScore());
+
+		EcologicalBalance ecologicalBalance = new EcologicalBalance();
+		double ecoScore = ecologicalBalance.updateEcologicalBalance(recipe.getIngredients());
+		recipe.setEcoScore(ecoScore);
+		recipe.setEcologicalBalance(ecologicalBalance);
+
 
 
 

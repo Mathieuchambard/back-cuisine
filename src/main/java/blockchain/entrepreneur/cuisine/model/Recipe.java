@@ -18,14 +18,26 @@ public class Recipe {
 	private HeatBalance heatBalance;
 
 	private NutriScore nutriscore;
+
+	private EcologicalBalance ecologicalBalance;
+
+	private double ecoScore;
+
 	private int serves;
 	private int price;
 	private TimeRecipe timeRecipe;
 	private String date;
-	private String urlImage;
+
 	
 	public Recipe() {}
 
+	public EcologicalBalance getEcologicalBalance() {
+		return ecologicalBalance;
+	}
+
+	public void setEcologicalBalance(EcologicalBalance ecologicalBalance) {
+		this.ecologicalBalance = ecologicalBalance;
+	}
 
 	public NutriScore getNutriscore() {
 		return nutriscore;
@@ -33,6 +45,14 @@ public class Recipe {
 
 	public void setNutriscore(NutriScore nutriscore) {
 		this.nutriscore = nutriscore;
+	}
+
+	public double getEcoScore() {
+		return ecoScore;
+	}
+
+	public void setEcoScore(double ecoScore) {
+		this.ecoScore = ecoScore;
 	}
 
 	public HeatBalance getHeatBalance() {
@@ -100,14 +120,6 @@ public class Recipe {
 
 	public void setDate(String date) {
 		this.date = date;
-	}
-
-	public String getUrlImage() {
-		return urlImage;
-	}
-
-	public void setUrlImage(String urlImage) {
-		this.urlImage = urlImage;
 	}
 
 

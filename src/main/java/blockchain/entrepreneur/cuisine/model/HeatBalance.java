@@ -245,7 +245,7 @@ public class HeatBalance {
 
 	public void updateHeatBalance(List<IngredientDTO> ingredients) {
 		for (IngredientDTO ingredient : ingredients) {
-			Ingredient ingr = ingredient.getIngredient();
+			Ingredient ingr = ingredient.dtoToIngredient();
 			this.sum(ingredient.getQuantityGramme(ingr)/100,ingr.getHeatBalance());
 
 		}
