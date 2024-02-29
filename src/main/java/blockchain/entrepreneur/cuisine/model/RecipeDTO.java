@@ -1,5 +1,6 @@
 package blockchain.entrepreneur.cuisine.model;
 
+import java.util.List;
 import java.util.Map;
 
 public class RecipeDTO {
@@ -12,14 +13,19 @@ public class RecipeDTO {
 
     private Difficulty difficulty;
 
+    private List<String> encodeImage;
 
 
-    public RecipeDTO(String nameId, String name,TimeRecipe timeRecipe,NutriScore nutriscore,Difficulty difficulty) {
+
+
+
+    public RecipeDTO(String nameId, String name,TimeRecipe timeRecipe,NutriScore nutriscore,Difficulty difficulty,List<String> encodeImage) {
         this.nameId = nameId;
         this.name = name;
         this.timeRecipe=timeRecipe;
         this.nutriscore=nutriscore;
         this.difficulty=difficulty;
+        this.encodeImage = encodeImage;
     }
 
     public String getNameId() {
@@ -60,5 +66,13 @@ public class RecipeDTO {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public List<String> getEncodeImage() {
+        return encodeImage;
+    }
+
+    public void setEncodeImage(List<String> encodeImage) {
+        this.encodeImage = encodeImage;
     }
 }

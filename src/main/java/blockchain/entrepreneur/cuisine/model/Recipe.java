@@ -28,6 +28,8 @@ public class Recipe {
 	private TimeRecipe timeRecipe;
 	private String date;
 
+	private String[] encodeImage;
+
 	
 	public Recipe() {}
 
@@ -146,4 +148,12 @@ public class Recipe {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		this.date = dateDuJour.format(formatter);
     }
+
+	public String[] getEncodeImage() {
+		return encodeImage;
+	}
+
+	public void setEncodeImage(String[] encodeImage) {
+		this.encodeImage = encodeImage;
+	}
 }

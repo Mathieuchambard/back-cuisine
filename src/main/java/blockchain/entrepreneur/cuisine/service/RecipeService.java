@@ -11,6 +11,7 @@ import java.util.*;
 import blockchain.entrepreneur.cuisine.model.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.core.io.ClassPathResource;
@@ -119,7 +120,7 @@ public class RecipeService {
 		return recipe;
 	}
 
-	public Recipe getRecipe(String name){
+	public Recipe getRecipe(String name) {
 		File directory = new File("src/main/resources/recipe/json/" + name + ".json");
 		Recipe recipe = null;
 
@@ -158,14 +159,21 @@ public class RecipeService {
 
 
 							String nutriscoreString = (String) jsonObject.get("nutriscore");
-
-
 							String difficultyString = (String) jsonObject.get("difficulty");
+							JSONArray encodeImageObject = (JSONArray) jsonObject.get("encodeImage");
+							List<String> encodeImage = new ArrayList<>();
+
+
+                            for (Object o : encodeImageObject) {
+                                encodeImage.add((String) o);
+                            }
 
 							if (name != null) {
-								RecipeDTO recipeDTO = new RecipeDTO(nameId,name,timeRecipe,NutriScore.fromValue(nutriscoreString),Difficulty.fromValue(difficultyString));
-								recipeNames.add(recipeDTO);
+								RecipeDTO recipeDTO = new RecipeDTO(nameId,name,timeRecipe,NutriScore.fromValue(nutriscoreString),Difficulty.fromValue(difficultyString),encodeImage);
+								recipeNames.add(recipeDTO);;
 							}
+
+
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -223,8 +231,15 @@ public class RecipeService {
 
 
 								String difficultyString = (String) jsonObject.get("difficulty");
+								JSONArray encodeImageObject = (JSONArray) jsonObject.get("encodeImage");
+								List<String> encodeImage = new ArrayList<>();
 
-								RecipeDTO recipeDTO = new RecipeDTO(nameIdRecipe,nameRecipe,timeRecipe,NutriScore.fromValue(nutriscoreString),Difficulty.fromValue(difficultyString));
+								for (Object o : encodeImageObject) {
+									encodeImage.add((String) o);
+								}
+
+
+								RecipeDTO recipeDTO = new RecipeDTO(nameIdRecipe,nameRecipe,timeRecipe,NutriScore.fromValue(nutriscoreString),Difficulty.fromValue(difficultyString),encodeImage);
 								recipeNames.add(recipeDTO);
 							}
 						} catch (Exception e) {
