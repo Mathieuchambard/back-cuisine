@@ -243,11 +243,11 @@ public class HeatBalance {
 	}
 
 
-	public void updateHeatBalance(List<IngredientDTO> ingredients) {
+	public void updateHeatBalance(List<IngredientDTO> ingredients, int serves) {
 		for (IngredientDTO ingredient : ingredients) {
 			Ingredient ingr = ingredient.dtoToIngredient();
 			this.sum(ingredient.getQuantityGramme(ingr)/100,ingr.getHeatBalance());
-
 		}
+		this.ponderation(serves);
 	}
 }

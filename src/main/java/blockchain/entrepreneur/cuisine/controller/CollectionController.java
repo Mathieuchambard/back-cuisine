@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/collections")
 public class CollectionController {
 
     private CollectionService collectionService;
@@ -20,28 +21,28 @@ public class CollectionController {
     }
 
 
-    @GetMapping("/collections")
+    @GetMapping
     public ResponseEntity<List<CollectionRecipe>> getAllCollections() {
         return new ResponseEntity<List<CollectionRecipe>>(collectionService.getAllCollections(), HttpStatus.OK);
     }
 
-    @GetMapping("collection/{nameId}")
+    @GetMapping("/{nameId}")
     public ResponseEntity<CollectionRecipe> getCollection(@PathVariable String nameId) {
         return new ResponseEntity<CollectionRecipe>(collectionService.getCollection(nameId), HttpStatus.OK);
     }
 
 
-    @PostMapping("/post/collection")
+    @PostMapping
     public ResponseEntity<CollectionRecipe> postCollection(@RequestBody CollectionRecipe collection) {
         return new ResponseEntity<CollectionRecipe>(collectionService.postCollection(collection), HttpStatus.OK);
     }
 
-    @PutMapping("/modify/collection/{nameId}")
+    @PutMapping("/{nameId}")
     public ResponseEntity<CollectionRecipe> modifyCollection(@RequestBody CollectionRecipe collection,@PathVariable String nameId) {
         return new ResponseEntity<CollectionRecipe>(collectionService.modifyCollection(nameId,collection), HttpStatus.OK);
     }
 
-    @DeleteMapping("deleteCollection/{nameId}")
+    @DeleteMapping("/{nameId}")
     public ResponseEntity<CollectionRecipe> deleteCollection(@PathVariable String nameId) {
         return new ResponseEntity<CollectionRecipe>(collectionService.deleteCollection(nameId), HttpStatus.OK);
     }

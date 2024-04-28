@@ -39,7 +39,7 @@ public class PdfController {
         instructions.add("Le fourrer avec du tartare");
         instructions.add("faire cuire 30 min à Auswitch");
         
-        recipe.setInstructions(instructions);
+        //recipe.setInstructions(instructions);
 
         recipe.setServes(4);
         recipe.setPrice(5);

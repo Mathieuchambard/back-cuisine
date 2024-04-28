@@ -2,7 +2,6 @@ package blockchain.entrepreneur.cuisine.service;
 
 
 import java.io.*;
-import java.nio.file.Files;
 import java.text.Normalizer;
 import java.util.*;
 
@@ -10,11 +9,11 @@ import java.util.*;
 
 import blockchain.entrepreneur.cuisine.model.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import blockchain.entrepreneur.cuisine.repository.IngredientRepository;
@@ -45,7 +44,7 @@ public class RecipeService {
 		recipe.updateDate();
 
 		HeatBalance heatBalance = new HeatBalance();
-		heatBalance.updateHeatBalance(recipe.getIngredients());
+		heatBalance.updateHeatBalance(recipe.getIngredients(), recipe.getServes());
 		recipe.setHeatBalance(heatBalance);
 		recipe.setNutriscore(heatBalance.nutriScore());
 
@@ -73,7 +72,7 @@ public class RecipeService {
 		recipe.updateDate();
 
 		HeatBalance heatBalance = new HeatBalance();
-		heatBalance.updateHeatBalance(recipe.getIngredients());
+		heatBalance.updateHeatBalance(recipe.getIngredients(),recipe.getServes());
 		recipe.setHeatBalance(heatBalance);
 		recipe.setNutriscore(heatBalance.nutriScore());
 
@@ -128,6 +127,17 @@ public class RecipeService {
 			BufferedReader fileReader = new BufferedReader(reader);
 			ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			recipe = mapper.readValue(fileReader, Recipe.class);
+			for (IngredientDTO ingr : recipe.getIngredients()) {
+
+				ObjectMapper objectMapper = new ObjectMapper();
+				JsonNode jsonNode = objectMapper.readTree(new File("src/main/resources/jsonIngredient/" + ingr.getName() + ".json"));
+
+				String imageString = jsonNode.get("image").asText();
+				ingr.setEncodeImage(imageString);
+			}
+
+
+
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

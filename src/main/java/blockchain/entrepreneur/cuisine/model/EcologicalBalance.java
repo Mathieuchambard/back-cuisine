@@ -100,7 +100,7 @@ public class EcologicalBalance {
 	}
 	
 	public double ecologicalBalanceToEcoScore() {
-		return 100 - 20*Math.log(10*this.scoreEF)/ Math.log(2+1/(100*Math.pow(this.scoreEF,4)));
+		return 100 - 20*Math.log(10*this.scoreEF+1)/ Math.log(2+1/(100*Math.pow(this.scoreEF,4)));
 	}
 	public float getScoreEF() {
 		return scoreEF;

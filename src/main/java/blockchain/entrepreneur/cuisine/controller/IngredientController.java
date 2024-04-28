@@ -4,17 +4,14 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import blockchain.entrepreneur.cuisine.model.Ingredient;
 import blockchain.entrepreneur.cuisine.service.IngredientService;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/ingredients")
 public class IngredientController {
 
 	private IngredientService ingredientService;
@@ -24,7 +21,7 @@ public class IngredientController {
 	}
 		
 	
-	@GetMapping("/ingredients")
+	@GetMapping
 	public ResponseEntity<List<String>> getAllIngredients() {
 		return new ResponseEntity<List<String>>(ingredientService.getAllIngredients(), HttpStatus.OK);
 	}

@@ -12,7 +12,8 @@ public class IngredientDTO {
 	private String name;
 	private float quantity;
 	private Unit unit;
-	
+	private String encodeImage;
+
 	public IngredientDTO() {}
 	
 	public float getQuantityGramme(Ingredient ingr) {
@@ -70,6 +71,13 @@ public class IngredientDTO {
 		this.unit = unit;
 	}
 
+	public String getEncodeImage() {
+		return encodeImage;
+	}
+
+	public void setEncodeImage(String encodeImage) {
+		this.encodeImage = encodeImage;
+	}
 
 	public IngredientDTO(String name, float quantity, Unit unit) {
 		this.name = name;

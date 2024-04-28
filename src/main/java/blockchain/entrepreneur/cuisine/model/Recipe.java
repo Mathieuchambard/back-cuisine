@@ -12,7 +12,7 @@ public class Recipe {
 	private String nameId;
 	private String name;
 	private List<IngredientDTO> ingredients;
-	private List<String> instructions;
+	private List<Instruction> instructions;
 	private Difficulty difficulty;
 
 	private HeatBalance heatBalance;
@@ -82,11 +82,11 @@ public class Recipe {
 		this.ingredients = ingredients;
 	}
 	
-	public List<String> getInstructions() {
+	public List<Instruction> getInstructions() {
 		return instructions;
 	}
 	
-	public void setInstructions(List<String> instructions) {
+	public void setInstructions(List<Instruction> instructions) {
 		this.instructions = instructions;
 	}
 
