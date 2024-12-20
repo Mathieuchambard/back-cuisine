@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import blockchain.entrepreneur.cuisine.repository.IngredientRepository;
@@ -23,6 +24,8 @@ import blockchain.entrepreneur.cuisine.repository.RecipeRepository;
 @Service
 public class RecipeService {
 
+	@Value("${chemin.ressource}")
+	private String cheminRessource ;
 	private RecipeRepository recipeRepository;
 	private IngredientRepository ingredientRepository;
 
@@ -33,7 +36,7 @@ public class RecipeService {
 
 
 	public Recipe deleteRecipe(String nameId){
-		String cheminFichier = "src/main/resources/recipe/json/"+ nameId+".json";
+		String cheminFichier = cheminRessource  + "recipe/json/"+ nameId+".json";
 		File fichierASupprimer = new File(cheminFichier);
 		fichierASupprimer.delete();
 		return null;
@@ -56,7 +59,7 @@ public class RecipeService {
 		recipe.setNameId(nameId);
 
 
-		try (FileWriter fileWriter = new FileWriter("src/main/resources/recipe/json/" + nameId + ".json")) {
+		try (FileWriter fileWriter = new FileWriter(cheminRessource  + "recipe/json/" + nameId + ".json")) {
 			objectMapper.writeValue(fileWriter, recipe);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -84,7 +87,7 @@ public class RecipeService {
 
 
 
-		File dossier = new File("src/main/resources/recipe/json/");
+		File dossier = new File(cheminRessource  + "recipe/json/");
 		List<String> listNameId = new ArrayList<>();
 
 		File[] files = dossier.listFiles();
@@ -110,7 +113,7 @@ public class RecipeService {
 		recipe.setNameId(nameId);
 
 
-		try (FileWriter fileWriter = new FileWriter("src/main/resources/recipe/json/" + nameId + ".json")) {
+		try (FileWriter fileWriter = new FileWriter(cheminRessource  + "recipe/json/" + nameId + ".json")) {
 			objectMapper.writeValue(fileWriter, recipe);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -120,7 +123,7 @@ public class RecipeService {
 	}
 
 	public Recipe getRecipe(String name) {
-		File directory = new File("src/main/resources/recipe/json/" + name + ".json");
+		File directory = new File(cheminRessource  + "recipe/json/" + name + ".json");
 		Recipe recipe = null;
 
 		try (FileReader reader = new FileReader(directory)) {
@@ -130,7 +133,7 @@ public class RecipeService {
 			for (IngredientDTO ingr : recipe.getIngredients()) {
 
 				ObjectMapper objectMapper = new ObjectMapper();
-				JsonNode jsonNode = objectMapper.readTree(new File("src/main/resources/jsonIngredient/" + ingr.getName() + ".json"));
+				JsonNode jsonNode = objectMapper.readTree(new File(cheminRessource  + "jsonIngredient/" + ingr.getName() + ".json"));
 
 				String imageString = jsonNode.get("image").asText();
 				ingr.setEncodeImage(imageString);
@@ -145,7 +148,8 @@ public class RecipeService {
 	}
 	public List<RecipeDTO> getAllRecipes() {
 		List<RecipeDTO> recipeNames = new ArrayList<>();
-		File directory = new File("src/main/resources/recipe/json/");
+		File directory = new File(cheminRessource  + "recipe/json/");
+
 		if (directory.exists() && directory.isDirectory()) {
 			File[] files = directory.listFiles();
 
@@ -195,7 +199,7 @@ public class RecipeService {
 	}
 
 	public List<RecipeDTO> getAllRecipesCollection(String name) {
-		File directory = new File("src/main/resources/collection/" + name + ".json");
+		File directory = new File(cheminRessource  + "collection/" + name + ".json");
 		CollectionRecipe collection = null;
 
 		try (FileReader reader = new FileReader(directory)) {
@@ -208,7 +212,7 @@ public class RecipeService {
 
 
 		List<RecipeDTO> recipeNames = new ArrayList<>();
-		File directoryRecipe = new File("src/main/resources/recipe/json/");
+		File directoryRecipe = new File(cheminRessource  + "recipe/json/");
 		if (directoryRecipe.exists() && directoryRecipe.isDirectory()) {
 			File[] files = directoryRecipe.listFiles();
 

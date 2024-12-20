@@ -6,11 +6,8 @@ import java.util.List;
 public class CollectionRecipe {
     private List<String> listRecipe ;
     private String name;
-
     private String nameId;
-
     private String description;
-
     private Integer nRecipe;
 
     public boolean inCollection(String nameID){

@@ -12,6 +12,7 @@ import blockchain.entrepreneur.cuisine.model.CollectionRecipe;
 import blockchain.entrepreneur.cuisine.model.Recipe;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import blockchain.entrepreneur.cuisine.model.Ingredient;
@@ -21,6 +22,8 @@ import blockchain.entrepreneur.cuisine.repository.IngredientRepository;
 public class IngredientService {
 	
 	private IngredientRepository ingredientRepository;
+	@Value("${chemin.ressource}")
+	private String cheminRessource ;
 
 	public IngredientService(IngredientRepository ingredientRepository) {
 		this.ingredientRepository = ingredientRepository;
@@ -28,7 +31,7 @@ public class IngredientService {
 
 	public List<String> getAllIngredients() {
 		List<String> ingredients = new ArrayList<>();
-		File directory = new File("src/main/resources/jsonIngredient/");
+		File directory = new File(cheminRessource  + "jsonIngredient/");
 		if (directory.exists() && directory.isDirectory()) {
 			File[] files = directory.listFiles();
 

@@ -12,6 +12,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.text.Normalizer;
 import java.util.Random;
@@ -21,6 +22,8 @@ import java.util.regex.Pattern;
 
 @Service
 public class CollectionService {
+    @Value("${chemin.ressource}")
+    private String cheminRessource ;
 
     public CollectionService() {
     }
@@ -28,7 +31,7 @@ public class CollectionService {
 
     public CollectionRecipe getCollection(String nameId){
         CollectionRecipe coll = new CollectionRecipe();
-        try (FileReader reader = new FileReader("src/main/resources/collection/" + nameId+".json")) {
+        try (FileReader reader = new FileReader(cheminRessource  + "collection/" + nameId+".json")) {
             BufferedReader fileReader = new BufferedReader(reader);
             ObjectMapper mapper = new ObjectMapper();
             coll = mapper.readValue(fileReader, CollectionRecipe.class);
@@ -39,7 +42,7 @@ public class CollectionService {
     }
 
     public CollectionRecipe deleteCollection(String nameId){
-        String cheminFichier = "src/main/resources/collection/"+ nameId+".json";
+        String cheminFichier = cheminRessource  + "collection/"+ nameId+".json";
         File fichierASupprimer = new File(cheminFichier);
         fichierASupprimer.delete();
         return null;
@@ -48,7 +51,7 @@ public class CollectionService {
         ObjectMapper objectMapper = new ObjectMapper();
 
 
-        File dossier = new File("src/main/resources/collection/");
+        File dossier = new File(cheminRessource  + "collection/");
         List<String> listNameId = new ArrayList<>();
 
         File[] files = dossier.listFiles();
@@ -74,7 +77,7 @@ public class CollectionService {
         collection.setNameId(nameId);
 
 
-        try (FileWriter fileWriter = new FileWriter("src/main/resources/collection/" + nameId + ".json")) {
+        try (FileWriter fileWriter = new FileWriter(cheminRessource  + "collection/" + nameId + ".json")) {
             objectMapper.writeValue(fileWriter, collection);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -89,7 +92,7 @@ public class CollectionService {
         collection.setNameId(nameId);
 
 
-        try (FileWriter fileWriter = new FileWriter("src/main/resources/collection/" + nameId + ".json")) {
+        try (FileWriter fileWriter = new FileWriter(cheminRessource  + "collection/" + nameId + ".json")) {
             objectMapper.writeValue(fileWriter, collection);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -104,7 +107,7 @@ public class CollectionService {
 
     public List<CollectionRecipe> getAllCollections() {
         List<CollectionRecipe> collections = new ArrayList<>();
-        File directory = new File("src/main/resources/collection/");
+        File directory = new File(cheminRessource  + "collection/");
         if (directory.exists() && directory.isDirectory()) {
             File[] files = directory.listFiles();
 
