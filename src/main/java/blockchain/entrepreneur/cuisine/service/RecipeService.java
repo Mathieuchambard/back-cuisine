@@ -147,16 +147,24 @@ public class RecipeService {
 		return recipe;
 	}
 	public List<RecipeDTO> getAllRecipes() {
+
+
+
 		List<RecipeDTO> recipeNames = new ArrayList<>();
 		File directory = new File(cheminRessource  + "recipe/json/");
 
+
+
 		if (directory.exists() && directory.isDirectory()) {
 			File[] files = directory.listFiles();
+
+
 
 			if (files != null) {
 				JSONParser parser = new JSONParser();
 
 				for (File file : files) {
+
 					if (file.isFile() && file.getName().endsWith(".json")) {
 						try (FileReader reader = new FileReader(file)) {
 							Object obj = parser.parse(reader);
