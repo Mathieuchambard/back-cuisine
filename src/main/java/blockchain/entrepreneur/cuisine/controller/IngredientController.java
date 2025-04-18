@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import blockchain.entrepreneur.cuisine.model.Ingredient;
+import blockchain.entrepreneur.cuisine.model.Recipe;
 import blockchain.entrepreneur.cuisine.service.IngredientService;
 
 @RestController
@@ -24,6 +25,11 @@ public class IngredientController {
 	@GetMapping
 	public ResponseEntity<List<String>> getAllIngredients() {
 		return new ResponseEntity<List<String>>(ingredientService.getAllIngredients(), HttpStatus.OK);
+	}
+
+	@PostMapping
+	public ResponseEntity<Ingredient> addIngredient(@RequestBody Ingredient ingredient) {
+		return new ResponseEntity<Ingredient>(ingredientService.addIngredient(ingredient), HttpStatus.OK);
 	}
 
 	

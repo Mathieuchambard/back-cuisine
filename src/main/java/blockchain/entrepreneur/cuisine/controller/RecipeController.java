@@ -31,6 +31,12 @@ public class RecipeController {
 		return new ResponseEntity<>(recipeService.getAllRecipes(), HttpStatus.OK);
 	}
 
+	@GetMapping("/search/{nameSearch}")
+	public ResponseEntity<List<RecipeDTO>> getRecipesSearch(@PathVariable String nameSearch) {
+		return new ResponseEntity<>(recipeService.getRecipesSearch(nameSearch), HttpStatus.OK);
+	}
+
+
 	@GetMapping("/collection/{nameCollection}")
 	public ResponseEntity<List<RecipeDTO>> getAllRecipesCollection(@PathVariable String nameCollection) {
 		return new ResponseEntity<>(recipeService.getAllRecipesCollection(nameCollection), HttpStatus.OK);

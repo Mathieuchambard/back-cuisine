@@ -23,10 +23,21 @@ public class Ingredient {
 
 	private int ciqual;
 	private float unitTogramme;
+	private String image;
 
 	public Ingredient() {
 
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 
 	public boolean isGlutenFree() {
 		return glutenFree;

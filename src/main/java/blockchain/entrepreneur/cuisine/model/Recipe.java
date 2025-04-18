@@ -14,10 +14,11 @@ public class Recipe {
 	private List<IngredientDTO> ingredients;
 	private List<Instruction> instructions;
 	private Difficulty difficulty;
+	private UnitServes unitServes;
 
 	private HeatBalance heatBalance;
 
-	private NutriScore nutriscore;
+	private NutriScore nutriscore; 
 
 	private EcologicalBalance ecologicalBalance;
 
@@ -30,8 +31,23 @@ public class Recipe {
 
 	private String[] encodeImage;
 
+	private String[] tag;
+	private String[] recipeWith;
+	private String astuceChef;
+
+	
+
+
 	
 	public Recipe() {}
+
+	public UnitServes getUnitServes() {
+		return unitServes;
+	}
+
+	public void setUnitServes(UnitServes unitServes) {
+		this.unitServes = unitServes;
+	}
 
 	public EcologicalBalance getEcologicalBalance() {
 		return ecologicalBalance;
@@ -155,5 +171,29 @@ public class Recipe {
 
 	public void setEncodeImage(String[] encodeImage) {
 		this.encodeImage = encodeImage;
+	}
+
+	public String[] getTag() {
+		return tag;
+	}
+
+	public void setTag(String[] tag) {
+		this.tag = tag;
+	}
+
+	public String[] getRecipeWith() {
+		return recipeWith;
+	}
+
+	public void setRecipeWith(String[] recipeWith) {
+		this.recipeWith = recipeWith;
+	}
+
+	public String getAstuceChef() {
+		return astuceChef;
+	}
+
+	public void setAstuceChef(String astuceChef) {
+		this.astuceChef = astuceChef;
 	}
 }

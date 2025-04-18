@@ -15,17 +15,39 @@ public class RecipeDTO {
 
     private List<String> encodeImage;
 
+    private float ecoScore;
+
+    private String ingredients;
 
 
 
 
-    public RecipeDTO(String nameId, String name,TimeRecipe timeRecipe,NutriScore nutriscore,Difficulty difficulty,List<String> encodeImage) {
+
+    public RecipeDTO(String nameId, String name,TimeRecipe timeRecipe,NutriScore nutriscore,Difficulty difficulty,float ecoScore,List<String> encodeImage,String ingredients) {
         this.nameId = nameId;
         this.name = name;
         this.timeRecipe=timeRecipe;
         this.nutriscore=nutriscore;
         this.difficulty=difficulty;
         this.encodeImage = encodeImage;
+        this.ecoScore=ecoScore;
+        this.ingredients=ingredients;
+    }
+
+    public float getEcoScore() {
+        return ecoScore;
+    }
+
+    public void setEcoScore(float ecoScore) {
+        this.ecoScore = ecoScore;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
     }
 
     public String getNameId() {
