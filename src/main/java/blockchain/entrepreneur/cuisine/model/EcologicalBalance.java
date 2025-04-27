@@ -41,23 +41,23 @@ public class EcologicalBalance {
 		this.epuisementMineraux= 0;
 	}
 	
-	public void sum(float ponderation, EcologicalBalance heatbalance) {
+	public void sum(float ponderation, EcologicalBalance ecologicalBalance) {
 
-		this.scoreEF += ponderation * heatbalance.scoreEF;
-		this.changementClimatique += ponderation * heatbalance.changementClimatique;
-		this.appauvrissementCoucheOzone += ponderation * heatbalance.appauvrissementCoucheOzone;
-		this.rayonnementsIonisants += ponderation * heatbalance.rayonnementsIonisants;
-		this.formationPhotochimiqueOzone += ponderation * heatbalance.formationPhotochimiqueOzone;
-		this.particules+= ponderation * heatbalance.particules;
-		this.acidificationTerrestreEtEauxDouces += ponderation * heatbalance.acidificationTerrestreEtEauxDouces;
-		this.eutrophisationTerrestre += ponderation * heatbalance.eutrophisationTerrestre;
-		this.eutrophisationEauxDouces += ponderation * heatbalance.eutrophisationEauxDouces;
-		this.eutrophisationMarine += ponderation * heatbalance.eutrophisationMarine;
-		this.utilisationSol += ponderation * heatbalance.utilisationSol;
-		this.ecotoxiciteEcosystemesAquatiqueEauDouce += ponderation * heatbalance.ecotoxiciteEcosystemesAquatiqueEauDouce;
-		this.epuisementEau += ponderation * heatbalance.epuisementEau;
-		this.epuisementEnergie += ponderation * heatbalance.epuisementEnergie;
-		this.epuisementMineraux += ponderation * heatbalance.epuisementMineraux;
+		this.scoreEF += ponderation * ecologicalBalance.scoreEF;
+		this.changementClimatique += ponderation * ecologicalBalance.changementClimatique;
+		this.appauvrissementCoucheOzone += ponderation * ecologicalBalance.appauvrissementCoucheOzone;
+		this.rayonnementsIonisants += ponderation * ecologicalBalance.rayonnementsIonisants;
+		this.formationPhotochimiqueOzone += ponderation * ecologicalBalance.formationPhotochimiqueOzone;
+		this.particules+= ponderation * ecologicalBalance.particules;
+		this.acidificationTerrestreEtEauxDouces += ponderation * ecologicalBalance.acidificationTerrestreEtEauxDouces;
+		this.eutrophisationTerrestre += ponderation * ecologicalBalance.eutrophisationTerrestre;
+		this.eutrophisationEauxDouces += ponderation * ecologicalBalance.eutrophisationEauxDouces;
+		this.eutrophisationMarine += ponderation * ecologicalBalance.eutrophisationMarine;
+		this.utilisationSol += ponderation * ecologicalBalance.utilisationSol;
+		this.ecotoxiciteEcosystemesAquatiqueEauDouce += ponderation * ecologicalBalance.ecotoxiciteEcosystemesAquatiqueEauDouce;
+		this.epuisementEau += ponderation * ecologicalBalance.epuisementEau;
+		this.epuisementEnergie += ponderation * ecologicalBalance.epuisementEnergie;
+		this.epuisementMineraux += ponderation * ecologicalBalance.epuisementMineraux;
 
 
 	}
@@ -85,7 +85,7 @@ public class EcologicalBalance {
 		for (IngredientDTO ingredient : ingredients) {
 			Ingredient ingr = ingredient.dtoToIngredient();
 			if (ingr.getEcologicalBalance() != null){
-			this.sum(ingredient.getQuantityGramme(ingr)/100,ingr.getEcologicalBalance());}
+			this.sum(ingredient.getQuantityGramme(ingr)/1000,ingr.getEcologicalBalance());}
 			else{
 				valide = false;
 			}

@@ -2,6 +2,7 @@ package blockchain.entrepreneur.cuisine.service;
 
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -129,7 +130,8 @@ public class RecipeService {
 		Recipe recipe = null;
 
 		try (FileReader reader = new FileReader(directory)) {
-			BufferedReader fileReader = new BufferedReader(reader);
+			BufferedReader fileReader = new BufferedReader(
+				new InputStreamReader(new FileInputStream(directory), StandardCharsets.UTF_8));			
 			ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 			recipe = mapper.readValue(fileReader, Recipe.class);
 			for (IngredientDTO ingr : recipe.getIngredients()) {
